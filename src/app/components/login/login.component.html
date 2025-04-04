@@ -1,0 +1,45 @@
+<div class="bodyLogin">
+    <div class="former animate-top" *ngIf="state === 'login'">
+        <div class="welcome">
+            <div class="title">Bienvenido</div>
+            <div class="description">Inicia sesión para continuar</div>
+        </div>
+        <div class="inputGroup">
+            <label for="">
+                <div class="title">Correo Electronico</div>
+                <input class="input" type="email" id="email" placeholder="Correo Electronico" (keyup.enter)="login()" />
+            </label>
+        </div>
+        <div class="btnLogin" (click)="login()">Ingresar</div>
+
+        <div class="singup" (click)="changeState('register')">Aún no tengo cuenta, Registrarme</div>
+    </div>
+
+    <div class="former animate-bottom" *ngIf="state === 'register'">
+        <div class="welcome">
+            <div class="title">Bienvenido</div>
+            <div class="description">Ingresa tus datos para registrarte</div>
+        </div>
+        <div class="inputGroup">
+            <label for="name">
+                <div class="title">Nombre</div>
+                <input class="input" type="text" id="name" placeholder="Nombre" />
+            </label>
+            <label for="email">
+                <div class="title">Correo Electronico</div>
+                <input class="input" type="email" id="email" placeholder="Correo Electronico" />
+            </label>
+            <label for="program">
+                <div class="title">Programa al cual desea inscribirse</div>
+                <select class="input" name="program" id="program">
+                    <option value="" selected disabled>Seleccione una opción</option>
+                    <option [value]="p.id" *ngFor="let p of programs">{{ p.name }}</option>
+                </select>
+            </label>
+        </div>
+        <div class="btnLogin" (click)="singUp()">Registrarse</div>
+
+        <div class="singup" (click)="changeState('login')">Ya tengo cuenta, Iniciar Sesión</div>
+    </div>
+    
+</div>

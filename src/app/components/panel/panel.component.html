@@ -1,0 +1,36 @@
+<div class="bodyPanel">
+    <div class="message">Hola {{ email }}, ¿listo para elegir tus materias?</div>
+
+    <div class="panel">
+        <div class="history">
+            <div class="title">Materias Seleccionadas</div>
+            <div class="signture" *ngFor="let s of signatureSelecteds">
+                <div class="credits">CREDITOS: {{ s.credits }}</div>
+                <div class="signatureTitle text-truncate">{{ s.name }}</div>
+                <div class="teacher">Prof. {{ s.teacher }}</div>
+                <div class="users">
+                    <div class="titleMin">Usuarios con la misma materia:</div>
+                    <div class="user">
+                        <span *ngFor="let u of s.users">{{ u }}, </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btnSing" [class.disabled]="signatureSelecteds.length === 0" (click)="saveSing()">Guardar Inscripción al programa</div>
+
+        </div>
+        <div class="signatures">
+            <div class="title">Materias Disponibles</div>
+
+            <div class="signature" *ngFor="let s of signatures" [class.disabled]="s.status !== 'active'">
+                <div class="credits">CREDITOS: {{ s.credits }}</div>
+                <div class="signatureTitle text-truncate">{{ s.name }}</div>
+                <div class="teacher">Prof. {{ s.teacher }}</div>
+                <div class="btnSing" *ngIf="!s.selected" (click)="selectSignature(s)">Inscribir</div>
+                <div class="btnSing red" *ngIf="s.selected" (click)="selectSignature(s)">Eliminar</div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

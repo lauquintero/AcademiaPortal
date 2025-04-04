@@ -1,0 +1,58 @@
+.bodyLogin {
+    padding: 20px;
+    .former {
+        width: 90%;
+        margin: auto;
+        background-color: var(--black);
+        min-width: 300px;
+        max-width: 500px;
+        margin: auto;
+        padding: 40px;
+        border-radius: 22px;
+        margin-top: 20vh;
+        .welcome {
+            margin-bottom: 20px;
+            color: var(--white);
+            text-align: center;
+            .title {
+                font-size: 24px;
+                font-weight: 600;
+            }
+            .description {
+                font-size: 14px;
+            }
+        }
+        .btnLogin {
+            margin: auto;
+            width: 200px;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 22px;
+            background-color: var(--principal);
+            text-align: center;
+            font-size: 12px;
+            color: var(--white);
+            cursor: pointer;
+            transition: var(--animation);
+        }
+        .btnLogin:hover {
+            transition: var(--animation);
+            background-color: var(--white);
+            color: var(--black);
+        }
+        .singup {
+            margin-top: 40px;
+            color: var(--principal);
+            font-size: 12px;
+            text-align: center;
+            text-decoration: underline;
+            font-weight: 300;
+            cursor: pointer;
+            transition: var(--animation);
+        }
+        .singup:hover {
+            transition: var(--animation);
+            color: var(--white);
+        }
+    }
+}
