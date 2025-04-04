@@ -10,65 +10,25 @@ import Swal from 'sweetalert2';
 })
 export class PanelComponent implements OnInit {
 
-  email: string = 'test@test.com';
-  signatures: any[] = [
-    {
-      id: 1,
-      name: 'Física',
-      teacher: 'Luis Santana',
-      credits: 3,
-      status: 'inactive',
-      selected: false,
-      users: ["Matteo Barros", "Juan Quinones"]
-    },
-    {
-      id: 2,
-      name: 'Física Quantica',
-      teacher: 'Luis Santana',
-      credits: 3,
-      status: 'active',
-      selected: false,
-      users: ["Matteo Barros", "Juan Quinones"]
-    },
-    {
-      id: 3,
-      name: 'Física Electromagnetica',
-      teacher: 'Luis Santana',
-      credits: 3,
-      status: 'active',
-      selected: false,
-      users: ["Matteo Barros", "Juan Quinones"]
-    },
-    {
-      id: 4,
-      name: 'Física Avanzada',
-      teacher: 'Luis Santana',
-      credits: 3,
-      status: 'active',
-      selected: false,
-      users: ["Matteo Barros", "Juan Quinones"]
-    },
-    {
-      id: 5,
-      name: 'Física Nuclear',
-      teacher: 'Luis Santana',
-      credits: 3,
-      status: 'active',
-      selected: false,
-      users: ["Matteo Barros", "Juan Quinones"]
-    }
-  ];
+  email: any = '';
+  signatures: any[] = [];
   signatureSelecteds: any[] = [];
 
   constructor(private service: AllService, private router: Router) { }
 
   ngOnInit(): void {
+    this.email = localStorage.getItem('email');
     this.getSignatures();
   }
 
   getSignatures() {
-    this.service.getSignatures().subscribe((data: any) => {
-      this.signatures = data.signatures;
+    this.service.getSignatures(this.email).subscribe((data: any) => {
+      this.signatures = data;
+      for (const s of this.signatures) {
+        if (s.selected) {
+          this.signatureSelecteds.push(s);
+        }
+      }
     }, err => {
       return Swal.fire('', err.message, 'error');
     });
@@ -88,15 +48,24 @@ export class PanelComponent implements OnInit {
   }
 
   saveSing() {
+    let signatrues = [];
+    for (const s of this.signatureSelecteds) {
+      signatrues.push(s.id);
+    }
     let body = {
       email: this.email,
-      signatures: this.signatureSelecteds
+      signature: signatrues
     };
     this.service.saveSing(body).subscribe((data: any) => {
       return Swal.fire('', data.message, 'success');
     }, err => {
       return Swal.fire('', err.message, 'error');
     });
+  }
+
+  close() {
+    this.router.navigate(['']);
+    localStorage.removeItem('email');
   }
 
 }

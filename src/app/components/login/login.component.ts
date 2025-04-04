@@ -11,23 +11,7 @@ import Swal from 'sweetalert2';
 export class LoginComponent implements OnInit {
 
   state: any = 'login';
-  programs: any = [
-    {
-      id: 1,
-      name: 'Ingenieria de Sistemas',
-      credits: 10
-    },
-    {
-      id: 2,
-      name: 'Ingenieria Civil',
-      credits: 20
-    },
-    {
-      id: 3,
-      name: 'Ingenieria automotriz',
-      credits: 15
-    }
-  ];
+  programs: any = [];
 
   constructor(private service: AllService, private router: Router) { }
 
@@ -41,7 +25,7 @@ export class LoginComponent implements OnInit {
 
   getPrograms() {
     this.service.getPrograms().subscribe((data: any) => {
-      this.programs = data.programs;
+      this.programs = data;
     }, err => {
       return Swal.fire('', err.message, 'error');
     });
@@ -50,6 +34,7 @@ export class LoginComponent implements OnInit {
   login() {
     const email = (document.getElementById('email') as HTMLInputElement ).value;
     this.service.login({email}).subscribe((data: any) => {
+      localStorage.setItem('email', email);
       this.router.navigate(['panel']);
     }, err => {
       return Swal.fire('', err.message, 'error');

@@ -133,3 +133,18 @@
 .red {
     background-color: red !important;
 }
+
+
+.nav {
+    display: flex;
+    .message {
+        margin-right: auto;
+        width: 50%;
+    }
+    .close {
+        color: var(--principal);
+        font-size: 12px;
+        cursor: pointer;
+        margin-right: 20px;
+    }
+}

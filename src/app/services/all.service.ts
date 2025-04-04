@@ -26,9 +26,9 @@ export class AllService {
     return this.http.post(`${environment.urlApi}/Estudiante/RegistrarUsuario`, body,  headers );
   }
 
-  getSignatures() {
+  getSignatures(email: any) {
     let headers: any =  this.headers;
-    return this.http.get(`${environment.urlApi}/Materia/ConsultarMateris`,  headers );
+    return this.http.get(`${environment.urlApi}/Materia/ConsultarMaterias?email=${email}`,  headers );
   }
 
   saveSing(body: any) {
